@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Register</title>
+    <link rel="stylesheet" href="dist/bootstrap.min.css">
+    <script src="dist/jquery.js"></script>
+    <script src="dist/jquery.validate.js"></script>
+    <style>
+        form{
+            border: solid 2px rgb(127, 215, 207);
+            border-radius: 10px;
+            background-color: rgb(222, 232, 241);
+        }
+        .error {
+            color : red;
+            font-size : 12px
+        }
+        body{
+            background-image: url(gambar/bg1.png);
+        }
+        h6{
+            font-weight: 500;
+            font-style:italic;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: rgb(239, 61, 120);
+        }
+      
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="col-md-6 p-lg-5 mx-auto">
+            <div class="row">
+                <form action="" method="post" id="formregister">
+                    <h2 style="color: rgb(239, 61, 120);" class="fw-bold my-1 text-center">Form Register</h2>
+                    <label>Nama Depan</label>
+                    <div class="form mb-2">
+                        <input type="text" class="form-control" name="namadepan">
+                    </div>
+                    <label>Nama Belakang</label>
+                    <div class="form mb-2">
+                        <input type="text" class="form-control" name="namabelakang">
+                    </div>
+                    <label>Alamat</label>
+                    <div class="form mb-2">
+                        <input type="text" class="form-control" name="alamat">
+                    </div>
+                    <label>Email</label>
+                    <div class="form mb-2">
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <label>Password</label>
+                    <div class="form mb-2">
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <label>Confirm Password</label>
+                    <div class="form mb-2">
+                        <input type="password" class="form-control" name="confirm_password">
+                    </div>
+                    <button style="color:white; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"  class="w-100 mb-2 btn btn-lg btn-primary" type="submit">Register</button>
+                    <h6 >Nama : Andi Nirina Nursiana Zasqia </h6>
+                    <h6 >Nim : F55121007</h6>
+                    <h6 >Kelas : A</h6>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="dist/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#formregister').submit(function(event){
+                event.preventDefault();
+
+                $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+                    return arg != value;
+                }, "value must not equal arg.");
+
+                $("#formregister").validate({
+
+                    highlight: function (input) {
+                        $(input).parents('.mb-2').addClass('error');
+                    },
+                    unhighlight: function (input){
+                        $(input).parents('.mb-2').removeClass('error');
+                    },
+                    errorPlacement: function (error, element){
+                        $(element).parents('.mb-2').append(error);
+                    },
+
+                    rules: {
+                        namadepan : "required",
+                        namabelakang : "required",
+                        username : {
+                            required : true,
+                            minlength: 2
+                        },
+                        alamat : {
+                            required: true,
+                            alamat : true
+                        },
+                        email : {
+                            required: true,
+                            email : true
+                        },
+                        password: {
+                            required:true,
+                            minlength: 8
+                        },
+                        confirm_password: {
+                            required: true,
+                            minlength: 8,
+                            equalTo: "#password"
+                        }
+                    },
+                    messages: {
+                        namadepan : "* Nama depan tidak boleh kosong",
+                        namabelakang : "* Nama belakang tidak boleh kosong",
+                        username : "* Username tidak boleh kosong",
+                        alamat : "* Alamat tidak boleh kosong",
+                        email : "* Masukan email yang valid",
+                        password : {
+                            required : "* Password tidak boleh kosong",
+                            minlength: "Password terdiri dari 8 karakter lebih"},
+                        confirm_password : {
+                            required : "* Password tidak boleh kosong",
+                            minlength: "Password terdiri dari 8 karakter lebih",
+                            equalTo : "Password tidak sama"
+                        }
+                    },
+
+                })
+            })
+        });
+    </script>
+</body>
+</html>
